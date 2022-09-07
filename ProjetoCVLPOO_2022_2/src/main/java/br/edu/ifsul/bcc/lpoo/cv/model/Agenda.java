@@ -4,139 +4,150 @@
  * and open the template in the editor.
  */
 package br.edu.ifsul.bcc.lpoo.cv.model;
+
+import java.io.Serializable;
 import java.util.Calendar;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Poglia
  */
-public class Agenda {
+@Entity
+@Table(name = "Agenda")
+public class Agenda implements Serializable
+{
    
+    @Id
+    @SequenceGenerator(name = "seq_agenda", sequenceName = "seq_agenda_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_agenda", strategy = GenerationType.SEQUENCE)  
     private Integer id;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_inicio;
+    
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_fim;
+    
+    @Column(nullable = false, length = 200)
     private String observacao;
+    
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoProduto tiposprodutos;
+    
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @ManyToOne
+    @JoinColumn(name = "med_pessoa_cpf", nullable = false)
     private Medico medicos;
+    
+    @ManyToOne
+    @JoinColumn(name = "func_pessoa_cpf", nullable = false)
     private Funcionario funcionarios;
     
-    public Agenda(){
+    @ManyToOne
+    @JoinColumn(name = "cliente_pessoa_cpf", nullable = false)
+    private Cliente clientes;
         
+
+    public Agenda(Integer id, Calendar data_inicio, Calendar data_fim, String observacao, TipoProduto tiposprodutos, Status status, Medico medicos, Funcionario funcionarios, Cliente cliente) {
+        this.id = id;
+        this.data_inicio = data_inicio;
+        this.data_fim = data_fim;
+        this.observacao = observacao;
+        this.tiposprodutos = tiposprodutos;
+        this.status = status;
+        this.medicos = medicos;
+        this.funcionarios = funcionarios;
+        this.clientes = clientes;
     }
 
-    /**
-     * @return the id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * @return the data_inicio
-     */
     public Calendar getData_inicio() {
         return data_inicio;
     }
 
-    /**
-     * @param data_inicio the data_inicio to set
-     */
     public void setData_inicio(Calendar data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    /**
-     * @return the data_fim
-     */
     public Calendar getData_fim() {
         return data_fim;
     }
 
-    /**
-     * @param data_fim the data_fim to set
-     */
     public void setData_fim(Calendar data_fim) {
         this.data_fim = data_fim;
     }
 
-    /**
-     * @return the observacao
-     */
     public String getObservacao() {
         return observacao;
     }
 
-    /**
-     * @param observacao the observacao to set
-     */
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 
-    /**
-     * @return the tiposprodutos
-     */
     public TipoProduto getTiposprodutos() {
         return tiposprodutos;
     }
 
-    /**
-     * @param tiposprodutos the tiposprodutos to set
-     */
     public void setTiposprodutos(TipoProduto tiposprodutos) {
         this.tiposprodutos = tiposprodutos;
     }
 
-    /**
-     * @return the status
-     */
     public Status getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
+
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    /**
-     * @return the medicos
-     */
+
     public Medico getMedicos() {
         return medicos;
     }
 
-    /**
-     * @param medicos the medicos to set
-     */
     public void setMedicos(Medico medicos) {
         this.medicos = medicos;
     }
 
-    /**
-     * @return the funcionarios
-     */
     public Funcionario getFuncionarios() {
         return funcionarios;
     }
 
-    /**
-     * @param funcionarios the funcionarios to set
-     */
     public void setFuncionarios(Funcionario funcionarios) {
         this.funcionarios = funcionarios;
     }
     
-    
+        public void setClientes(Cliente clientes) {
+        this.clientes = clientes;
+    }
     
 }

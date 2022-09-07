@@ -9,7 +9,8 @@ package br.edu.ifsul.bcc.lpoo.cv.model;
  *
  * @author Poglia
  */
-public enum Cargo {
+public enum Cargo 
+{
      ADESTRADOR, 
      ATENDENTE, 
      AUXILIAR_VETERINARIO

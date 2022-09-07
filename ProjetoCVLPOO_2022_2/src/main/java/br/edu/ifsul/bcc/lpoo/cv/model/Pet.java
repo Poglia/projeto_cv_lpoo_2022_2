@@ -1,92 +1,90 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.bcc.lpoo.cv.model;
 import java.util.Calendar;
 
-/**
- *
- * @author Poglia
- */
+import java.io.Serializable;
+import java.util.Calendar;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+@Entity
+@Table(name = "Pet")
 public class Pet {
+     @Id
+    @SequenceGenerator(name = "seq_pet", sequenceName = "seq_pet_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_pet", strategy = GenerationType.SEQUENCE)   
     private Integer id;
+    
+    @Column(nullable = false, length = 100)
     private String nome;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_nascimento;
+    
+    @Column(nullable = false, length = 200)
     private String observacao;
+    
+    @ManyToOne
+    @JoinColumn(name = "raca_id", nullable = false)
     private Raca racas;
+        
+    @ManyToOne
+    @JoinColumn(name = "cliente_cpf", nullable = false)
+    private Cliente clientes;    
+    
     
     public Pet(){
         
     }
 
-    /**
-     * @return the id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * @return the nome
-     */
+
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     * @return the data_nascimento
-     */
     public Calendar getData_nascimento() {
         return data_nascimento;
     }
 
-    /**
-     * @param data_nascimento the data_nascimento to set
-     */
     public void setData_nascimento(Calendar data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
 
-    /**
-     * @return the observacao
-     */
     public String getObservacao() {
         return observacao;
     }
 
-    /**
-     * @param observacao the observacao to set
-     */
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 
-    /**
-     * @return the racas
-     */
     public Raca getRacas() {
         return racas;
     }
 
-    /**
-     * @param racas the racas to set
-     */
     public void setRacas(Raca racas) {
         this.racas = racas;
     }

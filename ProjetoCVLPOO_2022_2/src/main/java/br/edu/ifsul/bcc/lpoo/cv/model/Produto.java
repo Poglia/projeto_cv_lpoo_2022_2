@@ -1,85 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.edu.ifsul.bcc.lpoo.cv.model;
 
-/**
- *
- * @author Poglia
- */
-public class Produto {
-     private Integer id;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Produto")
+public class Produto implements Serializable {
+      @Id
+    @SequenceGenerator(name = "seq_produto", sequenceName = "seq_produto_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_produto", strategy = GenerationType.SEQUENCE)      
+    private Integer id;
+    
+    @Column(nullable = true, length = 100)
     private String nome;
+    
+    @Column(nullable = false)
     private Float valor;
+        
+    @Column(nullable = false)
     private Float quantidade;
-    private TipoProduto tiposprodutos;
+        
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_cpf", nullable = false)
     private Fornecedor fornecedores;
+        
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoProduto tiposprodutos;
     
     public Produto(){
         
     }
 
-    /**
-     * @return the id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * @return the nome
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     * @return the valor
-     */
     public Float getValor() {
         return valor;
     }
 
-    /**
-     * @param valor the valor to set
-     */
     public void setValor(Float valor) {
         this.valor = valor;
     }
 
-    /**
-     * @return the quantidade
-     */
     public Float getQuantidade() {
         return quantidade;
     }
 
-    /**
-     * @param quantidade the quantidade to set
-     */
     public void setQuantidade(Float quantidade) {
         this.quantidade = quantidade;
     }
 
-    /**
-     * @return the tiposprodutos
-     */
     public TipoProduto getTiposprodutos() {
         return tiposprodutos;
     }

@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.edu.ifsul.bcc.lpoo.cv.model;
 
-/**
- *
- * @author Poglia
- */
-public class Medico extends Pessoa {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_medico")
+@DiscriminatorValue("M")
+public class Medico extends Pessoa{
     private String numero_crmv;
     
     public Medico(){

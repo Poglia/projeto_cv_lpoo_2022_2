@@ -1,17 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.bcc.lpoo.cv.model;
 
-/**
- *
- * @author Poglia
- */
-public class Funcionario  extends Pessoa {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "Funcionario")
+@DiscriminatorValue("U")
+public class Funcionario extends Pessoa{
+    @Column(nullable = false, length = 10)
     private String numero_ctps;
+    
+    @Column(nullable = false, length = 10)
     private String numero_pis;
+    
+    
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Cargo cargos;
     
     public Funcionario(){
